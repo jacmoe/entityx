@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/alecthomas/entityx.png)](https://travis-ci.org/alecthomas/entityx) [![Build status](https://ci.appveyor.com/api/projects/status/qc8s0pqb5ci092iv/branch/master)](https://ci.appveyor.com/project/alecthomas/entityx/branch/master) [![Gitter chat](https://badges.gitter.im/alecthomas.png)](https://gitter.im/alecthomas/Lobby)
 
 
-***NOTE: The current stable release 1.0.0 breaks backwards compataibility with < 1.0.0. See the [change log](CHANGES.md) for details.***
+***NOTE: The current stable release 1.0.0 breaks backward compatibility with < 1.0.0. See the [change log](CHANGES.md) for details.***
 
 Entity Component Systems (ECS) are a form of decomposition that completely decouples entity logic and data from the entity "objects" themselves. The [Evolve your Hierarchy](http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/) article provides a solid overview of EC systems and why you should use them.
 
@@ -158,7 +158,7 @@ entity components:
 ```c++
 entities.each<Position, Direction>([](Entity entity, Position &position, Direction &direction) {
   // Do things with entity, position and direction.
-};)
+});
 ```
 
 
@@ -344,27 +344,47 @@ while (true) {
 
 ## Installation
 
-EntityX has the following build and runtime requirements:
+### Arch Linux
 
-- A C++ compiler that supports a basic set of C++11 features (ie. Clang >= 3.1, GCC >= 4.7, and Visual Studio 2015).
-- For Visual C++ support you will need at least [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs.aspx).
-- [CMake](http://cmake.org/)
+    pacman -S entityx
+
+### OSX
+
+    brew install entityx
+
+### Windows
+
+Build it manually.
+
+Requirements:
+
+* [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs.aspx) or later, or a C++ compiler that supports a basic set of C++11 features (ie. Clang >= 3.1 or GCC >= 4.7).
+* [CMake](http://cmake.org/)
+
+### Building entityx - Using vcpkg
+
+You can download and install entityx using the [vcpkg](https://github.com/Microsoft/vcpkg) dependency manager:
+
+    git clone https://github.com/Microsoft/vcpkg.git
+    cd vcpkg
+    ./bootstrap-vcpkg.sh
+    ./vcpkg integrate install
+    ./vcpkg install entityx
+
+The entityx port in vcpkg is kept up to date by Microsoft team members and community contributors. If the version is out of date, please [create an issue or pull request](https://github.com/Microsoft/vcpkg) on the vcpkg repository.
+
+### Other systems
+
+Build it manually.
+
+Requirements:
+
+* A C++ compiler that supports a basic set of C++11 features (ie. Clang >= 3.1, GCC >= 4.7).
+* [CMake](http://cmake.org/)
 
 ### C++11 compiler and library support
 
 C++11 support is quite...raw. To make life more interesting, C++ support really means two things: language features supported by the compiler, and library features. EntityX tries to support the most common options, including the default C++ library for the compiler/platform, and libstdc++.
-
-### Installing on OSX Mountain Lion
-
-On OSX you must use Clang as the GCC version is practically prehistoric.
-
-I use Homebrew, and the following works for me:
-
-For libstdc++:
-
-```bash
-cmake -DENTITYX_BUILD_SHARED=0 -DENTITYX_BUILD_TESTING=1 ..
-```
 
 ### Installing on Ubuntu 12.04
 
@@ -408,4 +428,4 @@ make
 make install
 ```
 
-EntityX has currently only been tested on Mac OSX (Lion and Mountain Lion), and Linux Debian 12.04. Reports and patches for builds on other platforms are welcome.
+EntityX has currently only been tested on Mac OSX (Lion and Mountain Lion), Linux Debian 12.04 and Arch Linux. Reports and patches for builds on other platforms are welcome.
